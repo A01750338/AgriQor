@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	line-height: 1.7;	
+  overflow: auto;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;;
+}
+.custom-background {
+  color: #ff7e29;
+  background-image: url(campodemaiz.jpg);
+}
+
+@media screen and (max-width: 600px) {
+  .custom-background.w3-mobile {
+    color: white;
+    background: linear-gradient(to bottom, #042E6B 50%, #004CC4 100%);
+  }
+}
+a:hover {
+	text-decoration: none;
+}
+.link {
+  color: #ff7e29;
+}
+.link:hover {
+  color: #c4c3ca;
+}
+p {
+  font-weight: 500;
+  font-size: 14px;
+  color: #ff7e29;
+}
+h4 {
+  font-weight: 600;
+  color: #ff7e29;
+}
+h6 span{
+  padding: 0 20px;
+  font-weight: 700;
+}
+.section{
+  position: relative;
+  width: 100%;
+  display: block;
+}
+.full-height{
+  min-height: 100vh;
+}
+/*
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked){
+  display: none;
+}
+*/
+.checkbox:checked,
+.checkbox:not(:checked){
+display: none;
+}
+.checkbox:checked + label,
+.checkbox:not(:checked) + label{
+  position: relative;
+  display: block;
+  text-align: center;
+  width: 60px;
+  height: 16px;
+  border-radius: 8px;
+  padding: 0;
+  margin: 10px auto;
+  cursor: pointer;
+  background-color: #ff7e29;
+}
+.checkbox:checked + label:before,
+.checkbox:not(:checked) + label:before{
+  position: absolute;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ff7e29;
+  background-color: white;
+  font-family: 'unicons';
+  content: '\eb4f';
+  z-index: 20;
+  top: -10px;
+  left: -10px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 24px;
+  transition: all 0.5s ease;
+}
+.checkbox:checked + label:before {
+  transform: translateX(44px) rotate(-270deg);
+}
+
+.checkboxRecuerdame {
+  width: 14px; /* Ajusta el tamaño del checkbox */
+  height: 14px; /* Ajusta el tamaño del checkbox */
+  accent-color: #ff7e29;
+}
+label[for="recuerdame"] {
+  padding-top: 17px;
+  padding-left: 3px;
+}
+
+.card-3d-wrap {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  height: 400px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  margin-top: 60px;
+}
+.card-3d-wrap2 {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  height: 600px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  margin-top: 60px;
+}
+.card-3d-wrapper {
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: all 600ms ease-out; 
+}
+.card-front, .card-back {
+  width: 100%;
+  height: 100%;
+  background-color: #ffff;
+  position: absolute;
+  border-radius: 6px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
+  transform: rotateY(180deg);
+}
+.checkbox:checked ~ .card-3d-wrap2 .card-3d-wrapper {
+  transform: rotateY(180deg);
+}
+.center-wrap{
+  position: absolute;
+  width: 100%;
+  padding: 0 35px;
+  top: 50%;
+  left: 0;
+  transform: translate3d(0, -50%, 35px) perspective(100px);
+  z-index: 20;
+  display: block;
+}
+.form-group{ 
+  position: relative;
+  display: block;
+    margin: 0;
+    padding: 0;
+}
+.form-style {
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  color: #757575;
+  background-color: #f2f2f2;
+  border: none;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+.form-style:focus,
+.form-style:active {
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+.input-icon {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 48px;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: left;
+  color: #ff7e29;
+  -webkit-transition: all 200ms linear;
+   transition: all 200ms linear;
+}
+.btn{  
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition : all 200ms linear;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  align-items: center;
+  background-color: #ff7e29;
+  color: #ffffff;
+}
+.btn:hover{  
+  background-color: #000000;
+  color: #ff7e29;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+
+.select-container{
+  display: flex;
+  position: relative;
+  min-width: 250px;
+  height: 50px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+
+.select-box {
+  border: none;
+  appearance: none;
+  padding: 0 30px 0 15px;
+  width: 100%;
+  color:#757575;
+  background-color: #F2F2F2;
+  font-size: 16px;
+}
+
+.game-icons--mexico {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23000' d='M17.91 93.761c19.4 67.244 47.029 124.21 79.363 187.172l27.561-8.368c-34.337-52.44-62.494-96.45-72.16-152.817l24.231 6.32c12.377 75.413 79.95 133.444 109.213 168.56c4.905 16.388.589 32.776-4.916 46.354c51.616 25.103 104.672 57.56 163.292 69.531c22.014-17.212 44.264-27.73 68.126 7.726l9.833-28.094l23.177-.702L432.636 361c22.372 8.044 50.335-16.05 50.92-22.826c1.675-19.426.496-31.362 10.535-47.056l-55.836 7.725c-1.367 16.264 1.583 34.771-15.1 44.247c-88.44 50.234-115.313-62.388-107.457-109.564c-36.356-16.025-40.996-34.962-62.507-68.126l-22.475-2.81l-15.451 13.345l-40.033-51.27z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  
+  height: 48px;
+  -webkit-transition: all 200ms linear;
+   transition: all 200ms linear;
+}
