@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/styles.css">
-  <script src="js/index.js"></script>
+  <script src="js/post.js" defer></script>
 </head>
 
 <body class="custom-background w3-mobile">
@@ -29,11 +29,11 @@
                     <div class="section text-center">
                       <h4 class="mb-4 pb-3">Iniciar sesión</h4>
                       <div class="form-group">
-                        <input type="tel" class="form-style" placeholder="Número de teléfono" required>
+                        <input type="tel" class="form-style" placeholder="Número de teléfono" required id="numero-Login">
                         <i class="input-icon uil uil-phone"></i>
                       </div>
                       <div class="form-group mt-2">
-                        <input type="password" class="form-style" placeholder="Contraseña" required>
+                        <input type="password" class="form-style" placeholder="Contraseña" required id="contrasena-login">
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
 
@@ -42,130 +42,128 @@
                         <label for="recuerdame">Recúerdame</label>
                       </div>
 
-                      <a href="https://www.web-leb.com/code" class="btn mt-4">Entrar</a>
+                      <button id="login-btn" class="btn mt-4">Entrar</button>
                       <p class="mb-0 mt-4 text-center"><a href="https://www.web-leb.com/code" class="link">¿Olvidaste tu
                           contraseña?</a></p>
                     </div>
                   </div>
                 </div>
-                
-
-                  <form action="/register" method="post" class="card-back">
-                    <div class="center-wrap" id="regis1">
-                      <div class="section text-center">
-                        <h4 class="mb-3 pb-3">Regístrate</h4>
-                        <div class="form-group">
-                          <input type="text" class="form-style" placeholder="Nombre completo" required id="nombre">
-                          <i class="input-icon uil uil-user"></i>
-                        </div>
-                        <div class="form-group mt-2">
-                          <input type="tel" class="form-style" placeholder="Número de teléfono" required id="numero">
-                          <i class="input-icon uil uil-phone"></i>
-                        </div>
-                        <div class="form-group mt-2">
-                          <input type="password" class="form-style" placeholder="Contraseña" required id="contrasena">
-                          <i class="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <button type="button" id="cnt-btn" class="btn mt-4">Continuar</button>
+                <div class="card-back">
+                  <div class="center-wrap" id="regis1">
+                    <div class="section text-center">
+                      <h4 class="mb-3 pb-3">Regístrate</h4>
+                      <div class="form-group">
+                        <input type="text" class="form-style" placeholder="Nombre completo" required id="nombre">
+                        <i class="input-icon uil uil-user"></i>
                       </div>
+                      <div class="form-group mt-2">
+                        <input type="tel" class="form-style" placeholder="Número de teléfono" required id="numero">
+                        <i class="input-icon uil uil-phone"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input type="password" class="form-style" placeholder="Contraseña" required id="contrasena">
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                      <button type="button" id="cnt-btn" class="btn mt-4">Continuar</button>
                     </div>
-  
-                    <div class="center-wrap" id="regis2" style="display: none;">
-                      <div class="section text-center">
-                        <h4 class="mb-3 pb-3">Completa los detalles para registrarte</h4>
-                        <div class="form-group">
-                          <input type="date" class="form-style" id="fecha">
-                          <p style="color: #757575; text-align: left">Fecha de nacimiento</p>
-                          <i class="input-icon uil uil-calendar-alt"></i>
-                        </div>
-  
-                        <div class="form-group">
-                          <select class="form-style" id="genero">
-                            <option value="">Selecciona una opción</option>
-                            <option value="H">Hombre</option>
-                            <option value="M">Mujer</option>
-                          </select>
-                          <p style="color: #757575; text-align: left">
-                            Género
-                          </p>
-                          <i class="input-icon uil uil-user-square"></i>
-                        </div>
-  
-                        <div class="form-group">
-                          <select class="form-style" id="relacion">
-                            <option value="">Selecciona una opción</option>
-                            <option value="cliente">Cliente</option>
-                            <option value="fabricanteAgroinsumos">Fabricante de agroinsumos</option>
-                            <option value="distribuidorAgroinsumos">Distribuidor de agroinsumos</option>
-                            <option value="proveedorSeguros">Proveedor de seguros</option>
-                            <option value="financiera">Financiera</option>
-                            <option value="empresaCPG">Empresa CPG</option>
-                            <option value="acopiador">Acopiador</option>
-                            <option value="inversionista">Inversionista</option>
-                            <option value="publicoGeneral">Público general</option>
-                            <!-- <option value="agricultor">Agricultor</option>
+                  </div>
+
+                  <div class="center-wrap" id="regis2" style="display: none;">
+                    <div class="section text-center">
+                      <h4 class="mb-3 pb-3">Completa los detalles para registrarte</h4>
+                      <div class="form-group">
+                        <input type="date" class="form-style" id="fecha">
+                        <p style="color: #757575; text-align: left">Fecha de nacimiento</p>
+                        <i class="input-icon uil uil-calendar-alt"></i>
+                      </div>
+
+                      <div class="form-group">
+                        <select class="form-style" id="genero">
+                          <option value="">Selecciona una opción</option>
+                          <option value="H">Hombre</option>
+                          <option value="M">Mujer</option>
+                        </select>
+                        <p style="color: #757575; text-align: left">
+                          Género
+                        </p>
+                        <i class="input-icon uil uil-user-square"></i>
+                      </div>
+
+                      <div class="form-group">
+                        <select class="form-style" id="relacion">
+                          <option value="">Selecciona una opción</option>
+                          <option value="cliente">Cliente</option>
+                          <option value="fabricanteAgroinsumos">Fabricante de agroinsumos</option>
+                          <option value="distribuidorAgroinsumos">Distribuidor de agroinsumos</option>
+                          <option value="proveedorSeguros">Proveedor de seguros</option>
+                          <option value="financiera">Financiera</option>
+                          <option value="empresaCPG">Empresa CPG</option>
+                          <option value="acopiador">Acopiador</option>
+                          <option value="inversionista">Inversionista</option>
+                          <option value="publicoGeneral">Público general</option>
+                          <!-- <option value="agricultor">Agricultor</option>
                               <option value="inversionista">Inversionista</option>
                               <option value="conociendoVerqor">Conociendo Verqor</option> -->
-                          </select>
-                          <p style="color: #757575; text-align: left">
-                            Relación con Verqor
-                          </p>
-                          <img class="input-icon" src="css/verqorlogo.png" style="width: 30px; height: 30px; top: 10px">
-                        </div>
-  
-                        <div class="form-group">
-                          <select class="form-style" id="estado">
-                            <option value="">Selecciona una opción</option>
-                            <option value="Aguascalientes">Aguascalientes</option>
-                            <option value="Baja California">Baja California</option>
-                            <option value="Baja California Sur">Baja California Sur</option>
-                            <option value="Campeche">Campeche</option>
-                            <option value="Coahuila">Coahuila</option>
-                            <option value="Colima">Colima</option>
-                            <option value="Chiapas">Chiapas</option>
-                            <option value="Chihuahua">Chihuahua</option>
-                            <option value="CDMX">Ciudad de México</option>
-                            <option value="Durango">Durango</option>
-                            <option value="Guanajuato">Guanajuato</option>
-                            <option value="Guerrero">Guerrero</option>
-                            <option value="Hidalgo">Hidalgo</option>
-                            <option value="Jalisco">Jalisco</option>
-                            <option value="Estado de México">Estado de México</option>
-                            <option value="Michoacán">Michoacán</option>
-                            <option value="Morelos">Morelos</option>
-                            <option value="Nayarit">Nayarit</option>
-                            <option value="Nuevo León">Nuevo León</option>
-                            <option value="Oaxaca">Oaxaca</option>
-                            <option value="Puebla">Puebla</option>
-                            <option value="Querétaro">Querétaro</option>
-                            <option value="Quintana Roo">Quintana Roo</option>
-                            <option value="San Luis Potosí">San Luis Potosí</option>
-                            <option value="Sinaloa">Sinaloa</option>
-                            <option value="Sonora">Sonora</option>
-                            <option value="Tabasco">Tabasco</option>
-                            <option value="Tamaulipas">Tamaulipas</option>
-                            <option value="Tlaxcala">Tlaxcala</option>
-                            <option value="Veracruz">Veracruz</option>
-                            <option value="Yucatán">Yucatán</option>
-                            <option value="Zacatecas">Zacatecas</option>
-                          </select>
-                          <p style="color: #757575; text-align: left">
-                            Estado
-                          </p>
-                          <i class="input-icon">
-                            <span class="game-icons--mexico"></span>
-                          </i>
-                        </div>
-  
-                        <button type="submit" class="btn" id="submitRegis">Registrar</button>
-  
-                        <p class="mb-0 mt-1 text-center"></p><button type="button" id="bck-btn" class="link"
-                          style="border: none; background-color: white;">Regresar</button>
+                        </select>
+                        <p style="color: #757575; text-align: left">
+                          Relación con Verqor
+                        </p>
+                        <img class="input-icon" src="css/verqorlogo.png" style="width: 30px; height: 30px; top: 10px">
                       </div>
-                    </div>
-                  </form>
 
-                
+                      <div class="form-group">
+                        <select class="form-style" id="estado">
+                          <option value="">Selecciona una opción</option>
+                          <option value="Aguascalientes">Aguascalientes</option>
+                          <option value="Baja California">Baja California</option>
+                          <option value="Baja California Sur">Baja California Sur</option>
+                          <option value="Campeche">Campeche</option>
+                          <option value="Coahuila">Coahuila</option>
+                          <option value="Colima">Colima</option>
+                          <option value="Chiapas">Chiapas</option>
+                          <option value="Chihuahua">Chihuahua</option>
+                          <option value="CDMX">Ciudad de México</option>
+                          <option value="Durango">Durango</option>
+                          <option value="Guanajuato">Guanajuato</option>
+                          <option value="Guerrero">Guerrero</option>
+                          <option value="Hidalgo">Hidalgo</option>
+                          <option value="Jalisco">Jalisco</option>
+                          <option value="Estado de México">Estado de México</option>
+                          <option value="Michoacán">Michoacán</option>
+                          <option value="Morelos">Morelos</option>
+                          <option value="Nayarit">Nayarit</option>
+                          <option value="Nuevo León">Nuevo León</option>
+                          <option value="Oaxaca">Oaxaca</option>
+                          <option value="Puebla">Puebla</option>
+                          <option value="Querétaro">Querétaro</option>
+                          <option value="Quintana Roo">Quintana Roo</option>
+                          <option value="San Luis Potosí">San Luis Potosí</option>
+                          <option value="Sinaloa">Sinaloa</option>
+                          <option value="Sonora">Sonora</option>
+                          <option value="Tabasco">Tabasco</option>
+                          <option value="Tamaulipas">Tamaulipas</option>
+                          <option value="Tlaxcala">Tlaxcala</option>
+                          <option value="Veracruz">Veracruz</option>
+                          <option value="Yucatán">Yucatán</option>
+                          <option value="Zacatecas">Zacatecas</option>
+                        </select>
+                        <p style="color: #757575; text-align: left">
+                          Estado
+                        </p>
+                        <i class="input-icon">
+                          <span class="game-icons--mexico"></span>
+                        </i>
+                      </div>
+
+                      <button type="submit" class="btn" id="submitRegis">Registrar</button>
+
+                      <p class="mb-0 mt-1 text-center"></p><button type="button" id="bck-btn" class="link"
+                        style="border: none; background-color: white;">Regresar</button>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
 
             </div>
