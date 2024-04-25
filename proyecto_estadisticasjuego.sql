@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `estadisticasjuego`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `estadisticasjuego` (
-  `idPartida` int NOT NULL,
+  `idPartida` int NOT NULL AUTO_INCREMENT,
   `idUsuario` int DEFAULT NULL,
   `TotalGanado` int DEFAULT NULL,
   `Prestador` varchar(45) DEFAULT NULL,

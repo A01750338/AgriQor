@@ -337,3 +337,31 @@ label[for="recuerdame"] {
   width: 60%;
   border-radius: 10px;
 }
+
+.graphBack{
+  background-color: white;
+  width: 600px;
+  height: 300px;
+  border-radius: 20px;
+  padding: 5px;
+  margin: 10px;
+}
+.graf{
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px;
+  margin: 10px;
+}
+.graf2{
+  background-color: white;
+  border-radius: 20px;
+  width: 650px;
+  height: 650px;
+  padding: 5px;
+  margin: 10px;
+}
+.graphs{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

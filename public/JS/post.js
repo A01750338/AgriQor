@@ -37,6 +37,19 @@ function checkData(){
     xhr.open('POST', '/login');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(payLoad);
+    
+    xhr.onload = function() {
+        if (xhr.status === 201) {
+            
+            console.log('Se ha logueado');
+            window.location.href = '/game.html';
+        } else {
+            
+            console.log('Ocurrió un error al logearse');
+        }
+    
+    };
+    
 }
 
 function saveData() {
@@ -66,17 +79,17 @@ reglog.oninput = function () {
         regis1.style.display = 'block';
         regis2.style.display = 'none';
     }
-}
+};
 
 cntbtn.onclick = function () {
     regis1.style.display = 'none';
     regis2.style.display = 'block';
     cardback.style.height = '600px';
-}
+};
 
 bckbtn.onclick = function () {
     regis1.style.display = 'block';
     regis2.style.display = 'none';
     cardback.style.height = '400px';
-}
+};
 

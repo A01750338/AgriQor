@@ -1,13 +1,14 @@
-// Import required modules
+
 const express = require('express');
 const mysql = require('mysql');
 const util = require('util');
+const crypto = require('crypto');
 
-// Set server configuration
+
 const port = 8080;
-const ipAddr = '44.221.109.63'; // <--- UPDATE THIS LINE
+const ipAddr = '44.221.109.63'; 
 
-// Create a connection to the database
+
 const db = mysql.createConnection({
   host: 'localhost',
   database: 'proyecto',
@@ -15,38 +16,38 @@ const db = mysql.createConnection({
   password: process.env.MYSQL_PASSWORD
 });
 
-// Promisify methods to allow them to be used with async/await
+
 db.connect = util.promisify(db.connect);
 db.query = util.promisify(db.query);
 
-// Create an instance of Express
+
 const app = express();
 
-// For every request, log the current date, HTTP method, and resource
+
 app.use((req, res, next) => {
   console.log(new Date(), req.method, req.url);
   next();
 });
 
-// Serve static files from the 'public' directory
+
 app.use(express.static(__dirname + '/public'));
 
-// Parse JSON request bodies
+
 app.use(express.json());
 
-// Create a new quotation
+// REGISTRO USUARIO
 app.post('/register', async (req, res) => {
   try {
 
     const {Nombre, Numero, Contrasena,Nacimiento,Genero,Relacion,Ubicacion} = req.body;
-  
-    console.log(`Datos usuario: ${Nombre} ${Numero} ${Contrasena} ${Nacimiento} ${Genero} ${Relacion} ${Ubicacion} \n`);
+    const HASH = crypto.createHash('sha256').update(Contrasena).digest('hex');
+    console.log(`Datos usuario: ${Nombre} ${Numero} ${HASH} ${Nacimiento} ${Genero} ${Relacion} ${Ubicacion} \n`);
+    
+    
+    
     const sqlInsert = 'INSERT INTO usuario (Nombre,Genero,Nacimiento,Ubicacion,Relacion,Numero,Contrasena) VALUES (?,?,?,?,?,?,?)';
-    
-    const result = await db.query(sqlInsert, [Nombre,Genero,Nacimiento,Ubicacion,Relacion,Numero,Contrasena]);
-    // db.query(sqlInsert, [Nombre,Genero,Nacimiento,Ubicacion,Relacion,parseInt(Numero),Contrasena]);
-    
-    console.log(result)
+    const result = await db.query(sqlInsert, [Nombre,Genero,Nacimiento,Ubicacion,Relacion,Numero,HASH]);
+    console.log(result);
     
     res.type('text')
       .status(201)
@@ -56,32 +57,100 @@ app.post('/register', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+app.post('/unity/login', async (req,res) =>{
+  try{
+    const {number, password} = req.body;
+    
+    const HASH = crypto.createHash('sha256').update(password).digest('hex');
+    
+    console.log(`El usuario de Numero: ${number} y Contraseña : ${password} Se ha logueado exitosamente\n`);
+    const sqlInsert = 'SELECT * FROM usuario WHERE Numero = ? AND Contrasena = ?';
+    const result = await db.query(sqlInsert, [number,HASH]);
+    
+    console.log(result);
+    
+    res.type('text')
+      .status(201)
+      .send(`Datos de usuario = ${ result[0].idusuario }.\n`);
+    return;
+  }catch(err){
+    res.status(500).json(err);
+  }
+})
+
+// LOGIN USUARIO
 app.post('/login', async (req, res) => {
   try {
 
-    const {Nombre, Numero, Contrasena,Nacimiento,Genero,Relacion,Ubicacion} = req.body;
-  
-    console.log(`Datos usuario: ${Nombre} ${Numero} ${Contrasena} ${Nacimiento} ${Genero} ${Relacion} ${Ubicacion} \n`);
-    const sqlInsert = 'INSERT INTO usuario (Nombre,Genero,Nacimiento,Ubicacion,Relacion,Numero,Contrasena) VALUES (?,?,?,?,?,?,?)';
+    const {Numero, Contrasena} = req.body;
+    const HASH = crypto.createHash('sha256').update(Contrasena).digest('hex');
+    console.log(`Datos usuario: ${Numero} ${HASH}\n`);
     
-    const result = await db.query(sqlInsert, [Nombre,Genero,Nacimiento,Ubicacion,Relacion,parseInt(Numero),Contrasena]);
-    // db.query(sqlInsert, [Nombre,Genero,Nacimiento,Ubicacion,Relacion,parseInt(Numero),Contrasena]);
     
-    console.log(result)
     
-    res.type('text')
-      .status(201)
-      .send(`Usuario creado con el ID = ${ result.insertId }.\n`);
+    const sqlInsert = 'SELECT * FROM usuario WHERE Numero = ? AND Contrasena = ?';
+    const result = await db.query(sqlInsert, [Numero,HASH]);
+    console.log(result);
+    
+    
+    if(result[0]){
+      res.type('text').status(201).send(`Usuario de id ${result.insertId} se ha logueado`);
+    }else{
+      res.type('text').status(404).send(`Usuario no encontrado`);
+    }
+    
+    
     return;
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// This code should go after all handlers because it is the final
-// middleware in the chain. If no other middleware handles the
-// request, this middleware will be responsible for returning a
-// 404 - Not Found response.
+app.get('/estadisticas', async (req, res) => {
+  try {
+    const sqlSelect = 'SELECT u.Nombre, e.TotalGanado, e.Prestador, e.Desastres, e.Fortuna FROM estadisticasjuego AS e JOIN usuario AS u ON e.idusuario = u.idusuario';
+    const rows = await db.query(sqlSelect);
+    
+    if(rows[0]){
+      // console.log('Contiene algo');
+      // console.log(rows);
+      let result = [];
+      
+      for (let row of rows){
+        result.push({
+          nombre: row.Nombre,
+          ganado: row.TotalGanado,
+          prestador: row.Prestador,
+          desastres: row.Desastres,
+          fortunas: row.Fortuna
+        });
+      }
+      res.json(result);
+      return;
+    }else{
+      // console.log('Vacio');
+      res.status(404);
+    }
+    
+    let result = [];
+    for (let row of rows) {
+      result.push({
+        id: row.id,
+        author: row.author,
+        prelude: row.excerpt?.split(' ').slice(0, 3).join(' ') + '...',
+        url: `http://${ ipAddr }:${ port }/quotations/${ row.id }`
+      });
+    }
+    res.json(result);
+    return;
+  } catch (err) {
+      res.status(500).json(err);
+  }
+});
+
+app.get('/game.html');
+
 app.use((req, res) => {
   res.type('text')
     .status(404)
@@ -89,13 +158,10 @@ app.use((req, res) => {
   return;
 });
 
-// Start the server by binding and listening for connections
-// on the specified port
 app.listen(port, () => console.log(
 `Express started on http://${ ipAddr }:${ port }
 Press Ctrl-C to terminate.`));
 
-// Connect to the database
 (async () => {
   try {
     await db.connect();
