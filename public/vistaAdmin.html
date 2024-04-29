@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/getstats.js" defer></script>
     <title>Vista Administrador</title>
 </head>
+
 <body style="background-image:url(css/campodemaiz.jpg);background-color: #cccccc;">
     <nav>
         <div class="nav-wrap" style="background-color: white;">
             <a href=""><img src="css/verqorlogo.png" alt=""></a></ul>
             <ul>
-                <li><a href="game.html">Volver al juego</a></li>
+                <li><a href="/game">Volver al juego</a></li>
                 <li><a href="index.html">Cerrar Sesión</a></li>
             </ul>
         </div>
     </nav>
     <div class="graphs">
-        
+
         <div class="custom-bkg">
             <div class="graf">
                 <canvas id="myChart"></canvas>
@@ -32,113 +35,8 @@
                 <canvas id="myChart2"></canvas>
             </div>
         </div>
-        
+
     </div>
 </body>
-<script>
-  const ctx = document.getElementById('myChart');
-  const ctx2 = document.getElementById('myChart2');
-  const ctx3 = document.getElementById('myChart3');
 
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Hombre','Mujer'],
-      datasets: [{
-        label: '# of Votes',
-        data: [42,20],
-        borderWidth: 1
-      }]
-    },
-    options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Género de Usuarios'
-      }
-    }
-  },
-  });
-  new Chart(ctx2, {
-    type: 'polarArea',
-    data: {
-      labels: ['Cliente','Fabricante agroinsumos','Distribuidor agroinsumos','Proveedor de seguros','Financiera','Empresa CPG','Acopiador','Inversionista','Público General'],
-      datasets: [{
-        label: '# of Votes',
-        data: [2,3,7,8,6,4,3,2,4],
-        borderWidth: 1
-      }]
-    },
-    options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Relación con Verqor'
-      }
-    }
-  },
-  });
-  new Chart(ctx3, {
-    type: 'bar',
-    data: {
-      labels: ["Aguascalientes",
-    "Baja California",
-    "Baja California Sur",
-    "Campeche",
-    "Chiapas",
-    "Chihuahua",
-    "Ciudad de México",
-    "Coahuila",
-    "Colima",
-    "Durango",
-    "Guanajuato",
-    "Guerrero",
-    "Hidalgo",
-    "Jalisco",
-    "México",
-    "Michoacán",
-    "Morelos",
-    "Nayarit",
-    "Nuevo León",
-    "Oaxaca",
-    "Puebla",
-    "Querétaro",
-    "Quintana Roo",
-    "San Luis Potosí",
-    "Sinaloa",
-    "Sonora",
-    "Tabasco",
-    "Tamaulipas",
-    "Tlaxcala",
-    "Veracruz",
-    "Yucatán",
-    "Zacatecas"],
-      datasets: [{
-        label: '# of Votes',
-        data: [2,3,7,8,6,4,3,2,4],
-        borderWidth: 1
-      }]
-    },
-    options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Ubicacion de Usuarios'
-      }
-    }
-  },
-  });
-</script>
 </html>

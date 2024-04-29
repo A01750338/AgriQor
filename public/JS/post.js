@@ -25,7 +25,7 @@ var submitLogin = document.getElementById('login-btn');
 submitLogin.addEventListener('click', checkData);
 submitRegis.addEventListener('click', saveData);
 
-function checkData(){
+function checkData() {
     const defValue = 'unknown';
 
     const payLoad = JSON.stringify({
@@ -37,19 +37,19 @@ function checkData(){
     xhr.open('POST', '/login');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(payLoad);
-    
-    xhr.onload = function() {
+
+    xhr.onload = function () {
         if (xhr.status === 201) {
-            
+
             console.log('Se ha logueado');
-            window.location.href = '/game.html';
+            window.location.href = '/game';
         } else {
-            
+
             console.log('Ocurrió un error al logearse');
         }
-    
+
     };
-    
+
 }
 
 function saveData() {
