@@ -142,20 +142,20 @@ app.post('/logout', (req, res) => {
 });
 
 // VISTA ADMIN
-app.get('/admin', (req, res) => {
-  if (true) {
+app.get('/admin', requireLogin, (req, res) => {
+  if (req.session.user.pm == 1) {
     res.sendFile('vistaAdmin.html', { root: __dirname + '/public' });
   } else {
     res.redirect('/game');
   }
 });
 
-// TOMA ESTADISTICAS ADMIN
-app.get('/admin/estadisticas', async (req, res) => {
-  if (true) {
+// TOMA ESTADISTICAS ADMIN (GENERO)
+app.get('/admin/estadisticas/gen', requireLogin, async (req, res) => {
+  if (req.session.user.pm == 1) {
     try {
       const sqlSelect = 'SELECT Genero, COUNT(*) AS total from usuario GROUP BY Genero';
-      const rows = await db.query(sqlSelect);
+      let rows = await db.query(sqlSelect);
 
       if (rows[0]) {
         let result = [];
@@ -166,7 +166,7 @@ app.get('/admin/estadisticas', async (req, res) => {
           });
         }
         res.json(result);
-        console.log(result);
+        // console.log(result);
 
       }
     } catch {
@@ -177,8 +177,62 @@ app.get('/admin/estadisticas', async (req, res) => {
   }
 });
 
+// TOMA ESTADISTICAS ADMIN (UBICACION)
+app.get('/admin/estadisticas/ubi', requireLogin, async (req, res) => {
+  if (req.session.user.pm == 1) {
+    try {
+      const sqlSelect = 'SELECT Ubicacion, COUNT(*) AS total from usuario GROUP BY Ubicacion';
+      let rows = await db.query(sqlSelect);
+
+      console.log(rows);
+
+      if (rows[0]) {
+        let result = [];
+        for (let row of rows) {
+          result.push({
+            ubicacion: row.Ubicacion,
+            total: row.total,
+          });
+        }
+        res.json(result);
+      }
+    } catch {
+      res.status(404);
+    }
+  } else {
+    res.redirect('/game');
+  }
+});
+
+// TOMA ESTADISTICAS ADMIN (RELACION)
+app.get('/admin/estadisticas/rel', requireLogin, async (req, res) => {
+  if (req.session.user.pm == 1) {
+    try {
+      const sqlSelect = 'SELECT relacion, COUNT(*) AS total from usuario GROUP BY relacion';
+      let rows = await db.query(sqlSelect);
+
+      console.log(rows);
+
+      if (rows[0]) {
+        let result = [];
+        for (let row of rows) {
+          result.push({
+            relacion: row.relacion,
+            total: row.total,
+          });
+        }
+        res.json(result);
+      }
+    } catch {
+      res.status(404);
+    }
+  } else {
+    res.redirect('/game');
+  }
+});
+
 // TOMA DE ESTADISTICAS
-app.get('/estadisticas', async (req, res) => {
+app.get('/estadisticas', requireLogin, async (req, res) => {
   try {
     const sqlSelect = 'SELECT u.Nombre, e.TotalGanado, e.Prestador, e.Desastres, e.Fortuna FROM estadisticasjuego AS e JOIN usuario AS u ON e.idusuario = u.idusuario ORDER BY e.TotalGanado DESC LIMIT 50';
     const rows = await db.query(sqlSelect);
