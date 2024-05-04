@@ -1,13 +1,13 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     // Tu código JavaScript aquí
     const tabla = document.getElementById('jugadores');
-
-
+    
+    
     getTable();
-
-    function getTable() {
+    
+    function getTable(){
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/estadisticas');
+        xhr.open('GET','/estadisticas');
         xhr.onload = () => {
             const body = JSON.parse(xhr.responseText);
             let pos = 0;
@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <th>Fortunas</th>
                 </tr>
             `;
-            for (const row of body) {
-                result += `
+            for (const row of body){
+                result +=`
                     <tr>
-                        <td>${pos += 1}</td>
+                        <td>${pos+=1}</td>
                         <td>${row.nombre}</td>
                         <td>${row.ganado}</td>
                         <td>${row.prestador}</td>
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
             }
             tabla.innerHTML = result;
-
+            
         };
         xhr.send();
     }

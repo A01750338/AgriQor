@@ -21,35 +21,37 @@ var numeroFL = document.getElementById('numero-Login');
 var contrasenaFL = document.getElementById('contrasena-login');
 
 var submitLogin = document.getElementById('login-btn');
+var keepSession = document.getElementById('recuerdame');
 
 submitLogin.addEventListener('click', checkData);
 submitRegis.addEventListener('click', saveData);
 
-function checkData() {
+function checkData(){
     const defValue = 'unknown';
 
     const payLoad = JSON.stringify({
         Numero: numeroFL.value.trim() || defValue,
-        Contrasena: contrasenaFL.value.trim() || defValue
+        Contrasena: contrasenaFL.value.trim() || defValue,
+        Sesion: keepSession.value.trim() || false
     });
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/login');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(payLoad);
-
-    xhr.onload = function () {
+    
+    xhr.onload = function() {
         if (xhr.status === 201) {
-
+            
             console.log('Se ha logueado');
             window.location.href = '/game';
         } else {
-
+            
             console.log('Ocurrió un error al logearse');
         }
-
+    
     };
-
+    
 }
 
 function saveData() {
